@@ -114,4 +114,59 @@ public class oneDimensionalArrays {
         }
         return arr;
     }
+    public static void mergeSortAscending(int[] arr,int start, int end){
+        if(start >= end) return;  // Base Case.
+
+        int mid = ((start + end)/2);
+
+        // dividing left array
+
+        mergeSortAscending(arr, start, mid);
+
+        // dividing right array
+
+        mergeSortAscending(arr, mid+1, end);
+
+        merge(arr,start,mid,end);
+
+    }
+    public static void merge(int[] arr,int start,int mid,int end){
+        // creating sizes.
+        int n1 = mid - start +1;
+        int n2 = end - mid;
+
+        // initalize temp arrays.
+        int[] left = new int[n1];
+        int[] right = new int[n2];
+
+        // copying data
+        for(int i = 0;i<n1;i++){
+            left[i] = arr[start+i];
+        }
+        for(int i = 0;i<n2;i++){
+            right[i] = arr[mid+1+i];
+        }
+
+        int i = 0,j = 0, k = start;
+
+        while(i<left.length && j < right.length){
+            if(left[i] < right[j]){
+                arr[k++] = left[i++];
+            }else{
+                arr[k++] = right[j++];
+            }
+        }
+        while(i<n1){
+            arr[k++] = left[i++];
+        }
+        while(j<n2){
+            arr[k++] = right[j++];
+        }
+
+        for(int m = 0;m<arr.length;m++){
+            System.out.print(arr[m] +" ");
+        }
+        System.out.println();
+
+    }
 }
